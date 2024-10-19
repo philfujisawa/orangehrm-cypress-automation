@@ -16,8 +16,11 @@ describe('Orange HRM Tests', () => {
     genericField: ".oxd-input--active",
     dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close",
-    nationalityField: "[clear='false']",
-    submitButton: "[type='submit']"
+    genericCombobox: ".oxd-select-text--arrow",
+    selectBrazil: ".oxd-select-dropdown > :nth-child(27)",
+    selectSingle: '.oxd-select-dropdown > :nth-child(2)',
+    selectMale: ':nth-child(1) > :nth-child(2) > .oxd-radio-wrapper > label > .oxd-radio-input',
+    submitButton: "[type='submit']",
   }
 
   it.only('User Info Update - Success', () => {
@@ -36,8 +39,16 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.genericField).eq(5).clear().type("123456")
     cy.get(selectorsList.dateField).eq(0).clear().type("2025-12-25")
     cy.get(selectorsList.dateCloseButton).click()
-    cy.get(selectorsList.submitButton).eq(0).click()
-    cy.get("body").should("contain", "Successfully Updated")     
+    cy.get(selectorsList.genericCombobox).eq(0).click()
+    cy.get(selectorsList.selectBrazil).click()
+    cy.get(selectorsList.genericCombobox).eq(1).click()
+    cy.get(selectorsList.selectSingle).click()
+    cy.get(selectorsList.dateField).eq(1).clear().type("1987-07-05")
+    cy.get(selectorsList.dateCloseButton).click()
+    cy.get(selectorsList.selectMale).click()
+    cy.get(selectorsList.submitButton).eq(0).click({force: true})
+    cy.get("body").should("contain", "Successfully Updated")
+    cy.get(".oxd-toast-close")  
   })
   it('Login - Fail', () => {
     cy.visit('/auth/login')
