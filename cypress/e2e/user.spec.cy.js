@@ -11,10 +11,6 @@ const myInfoPage = new MyInfoPage()
 
 describe('Orange HRM Tests', () => {
 
-  const selectorsList = {
-    
-  }
-
   it('User Info Update - Success', () => {
     loginPage.accessLoginPage()
     loginPage.loginAnyWithUser(userData.userSuccess.username, userData.userSuccess.password)
@@ -26,9 +22,5 @@ describe('Orange HRM Tests', () => {
     myInfoPage.saveForm("1987-07-05")
         
   })
-  it('Login - Fail', () => {
-    loginPage.accessLoginPage()
-    loginPage.loginAnyWithUser(userData.userFail.username, userData.userFail.password)
-    loginPage.checkAccessInvalid()
-  })
+
 })
