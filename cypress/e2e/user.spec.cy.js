@@ -2,12 +2,12 @@ import userData from "../fixtures/user-data.json"
 import LoginPage from "../pages/loginPage.js"
 import DashboardPage from "../pages/dashboardPage.js"
 import MenuPage from "../pages/menuPage.js"
-import MyinfoPage from "../pages/myinfoPage.js"
+import MyInfoPage from "../pages/myinfoPage.js"
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
 const menuPage = new MenuPage()
-const myinfoPage = new MyinfoPage()
+const myInfoPage = new MyInfoPage()
 
 describe('Orange HRM Tests', () => {
 
@@ -15,17 +15,20 @@ describe('Orange HRM Tests', () => {
     
   }
 
-  it.only('User Info Update - Success', () => {
+  it('User Info Update - Success', () => {
     loginPage.accessLoginPage()
     loginPage.loginAnyWithUser(userData.userSuccess.username, userData.userSuccess.password)
     dashboardPage.checkdashboardPage()
     menuPage.accessPerfomance()
     menuPage.accessMyInfo()
-    myinfoPage.editMyInfo()
+    myInfoPage.fillPersonalDetails("Philippe", "Fujisawa", "Santos")
+    myInfoPage.fillEmployeeDetails("33112", "7587", "123456", "2025-12-25")
+    myInfoPage.saveForm("1987-07-05")
         
   })
   it('Login - Fail', () => {
     loginPage.accessLoginPage()
-    loginPage.loginWithUser(userData.userFail.username, userData.userFail.password)
+    loginPage.loginAnyWithUser(userData.userFail.username, userData.userFail.password)
+    loginPage.checkAccessInvalid()
   })
 })

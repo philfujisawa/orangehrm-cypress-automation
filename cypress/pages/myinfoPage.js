@@ -1,4 +1,4 @@
-class MyinfoPage {
+class MyInfoPage {
     selectorsList() {
         const selectors = {
             firstNameField: "[name='firstName']",
@@ -18,29 +18,37 @@ class MyinfoPage {
         return selectors
     }
 
-    editMyInfo () {
-        cy.get(this.selectorsList().firstNameField).clear().type("Phil")
-        cy.get(this.selectorsList().middleNameField).clear().type("Fujisawa")
-        cy.get(this.selectorsList().lastNameField).clear().type("Santos")
-        cy.get(this.selectorsList().genericField).eq(3).clear().type("33112")
-        cy.get(this.selectorsList().genericField).eq(4).clear().type("7587")
-        cy.get(this.selectorsList().genericField).eq(5).clear().type("123456")
-        cy.get(this.selectorsList().dateField).eq(0).clear().type("2025-12-25")
+    fillPersonalDetails (firstName, middleName, lastName) {
+        cy.get(this.selectorsList().firstNameField).clear().type(firstName)
+        cy.get(this.selectorsList().middleNameField).clear().type(middleName)
+        cy.get(this.selectorsList().lastNameField).clear().type(lastName)
+    }
+    
+    fillEmployeeDetails (employeeId, otherId, driversLicenseId, driversLicenseDate) {    
+        cy.get(this.selectorsList().genericField).eq(3).clear().type(employeeId)
+        cy.get(this.selectorsList().genericField).eq(4).clear().type(otherId)
+        cy.get(this.selectorsList().genericField).eq(5).clear().type(driversLicenseId)
+        cy.get(this.selectorsList().dateField).eq(0).clear().type(driversLicenseDate)
         cy.get(this.selectorsList().dateCloseButton).click()
-        cy.get(this.selectorsList().genericCombobox).eq(0).click()
+        
+    }
+
+    selectPersonalDetails(birthdayDate) {
+        cy.get(this.selectorsList().genericCombobox).eq(0).click()    
         cy.get(this.selectorsList().selectBrazil).click()
         cy.get(this.selectorsList().genericCombobox).eq(1).click()
         cy.get(this.selectorsList().selectSingle).click()
-        cy.get(this.selectorsList().dateField).eq(1).clear().type("1987-07-05")
+        cy.get(this.selectorsList().dateField).eq(1).clear().type(birthdayDate)
         cy.get(this.selectorsList().dateCloseButton).click()
         cy.get(this.selectorsList().selectMale).click()
+    }
+
+    saveForm() {   
         cy.get(this.selectorsList().submitButton).eq(0).click({force: true})
         cy.get("body").should("contain", "Successfully Updated")
         cy.get(".oxd-toast-close")
     }
-
     
-
 }
 
-export default MyinfoPage
+export default MyInfoPage
