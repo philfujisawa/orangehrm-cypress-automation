@@ -10,5 +10,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "chance": "^1.1.12"
+  }
 }
