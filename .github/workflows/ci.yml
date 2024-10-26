@@ -10,14 +10,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
+          node-version: '20'  
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
 
       - run: npm install -g pnpm
         
-      - run: |
-            echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
-            pnpm install    
+      - run: pnpm install    
         
       - uses: cypress-io/github-action@v6
         with:
