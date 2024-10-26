@@ -16,8 +16,8 @@ jobs:
 
       - name: Install pnpm
         run: |
-            npm install -g pnpm
-            export PATH="/home/runner/.npm-global/bin:$PATH"
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            export PATH="$HOME/.local/share/pnpm:$PATH"
             pnpm --version
   
       - name: Install dependencies
