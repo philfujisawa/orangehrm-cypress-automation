@@ -14,9 +14,14 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
 
-      - run: npm install -g pnpm
-        
-      - run: pnpm install    
+      - name: Install pnpm
+        run: |
+            npm install -g pnpm
+            export PATH="/home/runner/.npm-global/bin:$PATH"
+            pnpm --version
+  
+      - name: Install dependencies
+        run: pnpm install
         
       - uses: cypress-io/github-action@v6
         with:
