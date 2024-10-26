@@ -13,9 +13,9 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
 
-      - run: npm install -g pnpm
-
-      - run: echo "::add-path::$(npm root -g)/pnpm/bin"
+      - run: |
+            npm install -g pnpm
+            export PATH="$(npm bin -g):$PATH"
 
       - run: pnpm install
 
