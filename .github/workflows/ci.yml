@@ -14,10 +14,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Add pnpm to PATH
-        run: echo "::add-path::$(npm bin -g)"
+        run: |
+          npm install -g pnpm
+          export PATH=$(npm bin -g):$PATH
 
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
