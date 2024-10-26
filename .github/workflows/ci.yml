@@ -16,6 +16,9 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Add pnpm to PATH
+        run: echo "::add-path::$(npm bin -g)"
+
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
 
