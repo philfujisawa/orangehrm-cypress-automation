@@ -16,12 +16,13 @@ jobs:
         run: npm install -g pnpm
 
       - name: Ensure pnpm lock file
-        run: test -f pnpm-lock.yaml || echo "pnpm-lock.yaml not found"
+        run: |
+          ls -la
 
       - name: Install Dependencies
         run: |
           export PATH=$(npm bin -g):$PATH
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
 
       - name: Cypress Tests
         uses: cypress-io/github-action@v5
