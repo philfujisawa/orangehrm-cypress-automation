@@ -13,8 +13,8 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
        
-    #   - name: Install pnpm
-    #     run: npm install -g pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
     #   - name: Ensure pnpm lock file
     #     run: |
