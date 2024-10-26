@@ -23,6 +23,9 @@ jobs:
         run: |
           export PATH=$(npm bin -g):$PATH
           pnpm install --no-frozen-lockfile
+      
+      - name: Set LIBGL_ALWAYS_INDIRECT
+        run: echo "LIBGL_ALWAYS_INDIRECT=1" >> $GITHUB_ENV
 
       - name: Cypress Tests
         uses: cypress-io/github-action@v5
