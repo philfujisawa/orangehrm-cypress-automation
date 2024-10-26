@@ -11,15 +11,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'npm'
 
       - name: Install pnpm
-        run: |
-          npm install -g pnpm
-          echo "::add-path::$(npm bin -g)"
+        run: npm install -g pnpm
 
       - name: Install Dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: |
+          export PATH=$(npm bin -g):$PATH
+          pnpm install --frozen-lockfile
 
       - name: Cypress Tests
         uses: cypress-io/github-action@v5
