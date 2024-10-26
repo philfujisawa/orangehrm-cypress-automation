@@ -11,21 +11,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'pnpm'
-
+          cache: 'npm'
+          
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Add pnpm to PATH
-        run: echo "::add-path::$(npm bin -g)"
-
-      - name: Verify pnpm installation
-        run: |
-          echo $PATH
-          pnpm --version
-
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
+
+      - name: Verify Node and pnpm versions
+        run: |
+          node -v
+          pnpm -v
 
       - name: Cypress Tests
         uses: cypress-io/github-action@v5
