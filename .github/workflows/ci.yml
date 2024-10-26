@@ -17,8 +17,10 @@ jobs:
       - name: Install pnpm
         run: |
             npm install -g pnpm
-            export PATH="$(npm bin -g):$PATH"
-            pnpm install
+            echo "$(npm root -g)/.bin" >> $GITHUB_PATH
+  
+      - name: Install dependencies
+        run: pnpm install
         
       - uses: cypress-io/github-action@v6
         with:
