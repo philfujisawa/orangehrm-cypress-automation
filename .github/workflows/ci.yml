@@ -16,12 +16,9 @@ jobs:
 
       - name: Install pnpm
         run: |
-            curl -fsSL https://get.pnpm.io/install.sh | sh -
-            export PATH="$HOME/.local/share/pnpm:$PATH"
-            pnpm --version
-  
-      - name: Install dependencies
-        run: pnpm install
+            npm install -g pnpm
+            export PATH="$(npm bin -g):$PATH"
+            pnpm install
         
       - uses: cypress-io/github-action@v6
         with:
