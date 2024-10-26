@@ -16,8 +16,9 @@ jobs:
 
       - name: Install pnpm
         run: |
-            npm install -g pnpm
-            echo "$(npm root -g)/.bin" >> $GITHUB_PATH
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            export PATH="$HOME/.local/share/pnpm:$HOME/.pnpm-global/5/bin:$PATH"
+            pnpm --version
   
       - name: Install dependencies
         run: pnpm install
