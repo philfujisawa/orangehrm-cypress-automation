@@ -13,12 +13,13 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: | 
+            npm install -g pnpm
+            echo "$(npm bin -g)" >> $GITHUB_PATH
+            echo "LIBGL_ALWAYS_INDIRECT=1" >> $GITHUB_ENV
 
       - name: Install Dependencies
-        run: |
-          export PATH=$(npm bin -g):$PATH
-          pnpm install --no-frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
