@@ -11,14 +11,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Ensure pnpm lock file
         run: |
-          test -f pnpm-lock.yaml || echo "pnpm-lock.yaml not found"
+          npm install -g pnpm
+          echo "::add-path::$(npm bin -g)"
 
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
