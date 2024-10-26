@@ -6,29 +6,28 @@ jobs:
   build-test:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'  
-          cache: 'pnpm'
-          cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
 
       - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install Dependencies
         run: |
-            curl -fsSL https://get.pnpm.io/install.sh | sh -
-            export PATH="$HOME/.local/share/pnpm:$HOME/.pnpm-global/5/bin:$PATH"
-            pnpm --version
-  
-      - name: Install dependencies
-        run: pnpm install
-        
-      - uses: cypress-io/github-action@v6
+          export PATH=$(npm bin -g):$PATH
+          pnpm install --no-frozen-lockfile
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
         with:
           start: 'npm run dev'
           build: 'npm run build'
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Cypress Artifacts
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: Cypress Result
