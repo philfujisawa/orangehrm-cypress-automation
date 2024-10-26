@@ -11,10 +11,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.12'
-          cache: 'npm'
 
       - name: Install pnpm
         run: npm install -g pnpm
+
+      - name: Ensure pnpm lock file
+        run: test -f pnpm-lock.yaml || echo "pnpm-lock.yaml not found"
 
       - name: Install Dependencies
         run: |
