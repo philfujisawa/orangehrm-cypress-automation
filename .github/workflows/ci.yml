@@ -1,36 +1,27 @@
 name: CI
+
 on: [push]
+
 jobs:
   build-test:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-                  
-      - name: Install pnpm
-        run: npm install -g pnpm
-        
-    #   - name: Ensure pnpm lock file
-    #     run: |
-    #       ls -la
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
 
-    #   - name: Install Dependencies
-    #     run: |
-    #       export PATH=$(npm bin -g):$PATH
-    #       pnpm install --no-frozen-lockfile
-      
-    #   - name: Set LIBGL_ALWAYS_INDIRECT
-    #     run: echo "LIBGL_ALWAYS_INDIRECT=1" >> $GITHUB_ENV
+      - run: npm install -g pnpm
 
-      - name: Cypress Tests
-        uses: cypress-io/github-action@v6
+      - run: pnpm install
+
+      - uses: cypress-io/github-action@v6
         with:
           start: 'npm run dev'
           build: 'npm run build'
-        
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
