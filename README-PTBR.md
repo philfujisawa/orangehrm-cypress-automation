@@ -33,6 +33,7 @@ Antes de começar, certifique-se de ter instalado:
   
 **Observação:** Caso você não tenha um navegador instalado, o Cypress utilizará o Electron por padrão para executar os testes.
 Para aumentar a diversidade e tornar os dados de teste mais dinâmicos, integrei a biblioteca Chance ao projeto. Ela gera dados aleatórios, como nomes de usuário e números de identificação, entre outros. Isso contribui para evitar a repetição dos mesmos dados nos testes, proporcionando mais realismo e abrangência nos cenários testados.
+
 + Para Instalar:
 npm install chance
 

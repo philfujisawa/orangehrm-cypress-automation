@@ -1,6 +1,7 @@
 # OrangeHRM Cypress Automation
 ![projeto1](assets/hrm_orange_art.png)
 _This is my test automation project for the OrangeHRM application, a website structured for HR. My automation was developed to validate some of the system's main functionalities. I structured it using the Page Object Model (POM) pattern, which facilitates both organization and maintenance of the tests._
+
 **Para README em Português acessar no repositório o documento README-PTBR.md**
 
 ## Automated Functionalities
